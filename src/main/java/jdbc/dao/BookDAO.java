@@ -1,4 +1,6 @@
 package jdbc.dao;
+import models.Book;
+
 import java.util.List;
 
 public interface BookDAO {

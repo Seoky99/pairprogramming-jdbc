@@ -8,14 +8,20 @@ public class ConnectionFactory {
 
     private static ConnectionFactory instance;
 
-    private final String DB_URL;
-    private final String DB_USER;
-    private final String DB_PWD;
+    private String DB_URL;
+    private String DB_USER;
+    private String DB_PWD;
 
     private ConnectionFactory() {
-        this.DB_URL = System.getenv("DB_URL");
+        /*this.DB_URL = System.getenv("DB_URL");
         this.DB_USER = System.getenv("DB_USER");
-        this.DB_PWD = System.getenv("DB_PWD");
+        this.DB_PWD = System.getenv("DB_PWD"); */
+
+        //Removed env for testing purposes
+        this.DB_URL = "test";
+        this.DB_USER = "test";
+        this.DB_PWD = "test";
+
 
         // Fail-fast validation: Verify environment setup
         if (this.DB_URL == null || this.DB_USER == null || DB_PWD == null) {
@@ -36,6 +42,13 @@ public class ConnectionFactory {
             instance = new ConnectionFactory();
         }
         return instance;
+    }
+
+    //Using H2 to simulate
+    public void configure(String url, String username, String pwd) {
+        this.DB_URL = url;
+        this.DB_USER = username;
+        this.DB_PWD = pwd;
     }
 
     public Connection getConnection() throws SQLException {
